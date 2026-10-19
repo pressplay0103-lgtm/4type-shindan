@@ -1,0 +1,467 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self' blob: data:; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com; worker-src 'self' blob: https://cdn.jsdelivr.net https://unpkg.com; child-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>CUBE保障マトリクス</title><meta name="theme-color" content="#12395c"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-192.png"><style>:root{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",sans-serif;color:#14243c;background:#f3f6fb}*{box-sizing:border-box}body{margin:0}header{background:#12395c;color:white;padding:19px 17px 15px}header small{opacity:.75;letter-spacing:.1em}h1{font-size:21px;margin:5px 0}header p{font-size:12px;margin:5px 0;color:#d7e7f2}.wrap{max-width:1100px;margin:auto;padding:12px}section{background:#fff;border:1px solid #e0e7f0;border-radius:17px;padding:16px;margin-bottom:12px;box-shadow:0 3px 14px #132b4810}h2{font-size:16px;margin:0 0 12px}.sub{font-size:12px;color:#60748a;line-height:1.6}.btn{border:0;background:#136e80;color:white;border-radius:12px;padding:13px 16px;font-weight:700;font-size:14px;cursor:pointer}.btn.secondary{background:#e9f1f7;color:#163c57}.btn:disabled{opacity:.45}input[type=text],select{width:100%;font-size:16px;padding:13px;border:1px solid #cbd7e5;border-radius:11px;background:white}.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.metric{background:#f2f7fa;padding:13px;border-radius:13px}.metric span{display:block;font-size:11px;color:#536a7b}.metric strong{display:block;font-size:24px;margin-top:4px}.rider{display:flex;align-items:center;gap:10px;border-bottom:1px solid #edf1f6;padding:11px 0}.rider:last-child{border:0}.rider input{width:22px;height:22px;accent-color:#147c89}.rider label{flex:1;font-size:13px;font-weight:600}.rider small{display:block;font-size:11px;font-weight:400;color:#67798b;margin-top:4px}.rider b{font-size:13px;white-space:nowrap}.editamount input{width:105px;font-size:15px;padding:7px 5px;border:1px solid #cbd7e5;border-radius:7px}.editamount{display:flex;flex-direction:column;gap:3px;flex-shrink:0}.editamount span{font-size:10px;color:#526a7a}.editpremium{display:flex;align-items:center;gap:3px;flex-shrink:0;font-size:11px;color:#526a7a}.editpremium input{width:80px;font-size:16px;padding:7px 5px;border:1px solid #cbd7e5;border-radius:7px;text-align:right}.row{display:flex;gap:8px;align-items:center}.row input{flex:1;min-width:0}.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.tag{border:1px solid #cbdbe5;border-radius:20px;padding:8px 11px;background:#f8fbfd;color:#1e5267;font-size:12px;cursor:pointer}.tag.on{background:#136e80;color:#fff}.scroll{overflow-x:auto;border:1px solid #dbe4ef;border-radius:12px}table{border-collapse:separate;border-spacing:0;min-width:850px;width:100%;font-size:12px}th,td{border-right:1px solid #e4ebf2;border-bottom:1px solid #e4ebf2;padding:12px 9px;text-align:center;min-width:115px}th:first-child,td:first-child{position:sticky;left:0;background:#f7fafc;min-width:160px;text-align:left;z-index:1;font-weight:700}th{background:#eaf2f8;color:#20415d}th:first-child{z-index:2}.check{color:#855d19;background:#fff5db;border-radius:7px;padding:5px;display:inline-block;font-size:11px}.muted{color:#98a6b2}.note{background:#fff7e9;border-radius:10px;padding:11px;font-size:12px;color:#78531a;margin-top:11px;line-height:1.6}#photoName{font-size:12px;color:#526a7a;margin-top:9px}footer{text-align:center;color:#7b8a99;font-size:11px;padding:16px}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #7bc9d5} @media(max-width:520px){.wrap{padding:9px}section{padding:14px}.grid{gap:7px}.metric strong{font-size:21px}} .preview{display:none;width:100%;max-height:290px;object-fit:contain;margin-top:12px;border-radius:12px;background:#edf3f7}.status{font-size:12px;color:#34576d;margin-top:8px}.focus-row td{background:#eaf7f8!important}.focus-row td:first-child{background:#d7f0f1!important}textarea{width:100%;font:15px/1.6 -apple-system,sans-serif;border:1px solid #cbd7e5;border-radius:11px;padding:11px;min-height:110px} @media print{header,.btn,#imageTools,#ocrDetails,.note,footer{display:none!important}body{background:white}section{box-shadow:none;break-inside:avoid}.scroll{overflow:visible}table{font-size:10px}} </style><style>
+header small,header p,main>section:first-child,.note,#nativeScan,#cameraNext,#imageTools,#runOCR,#cancelOCR,#galleryFile,#resetDemo,#diff,#typingStatus,#riderAddStatus,main>section:nth-of-type(4),#photoName{display:none!important}
+header{padding:16px}header h1{margin:0}main>section:nth-of-type(2){text-align:center}main>section:nth-of-type(2)>.row{justify-content:center}#cameraFile{cursor:pointer}#ocrProgress{font-size:15px;line-height:1.6;padding:12px;background:#eef6fb;border-radius:10px}#photoPreview{max-height:200px}#riders{text-align:left}.rider:has(input[type=checkbox]:not(:checked)){display:none}#matrix{min-width:650px}
+</style><style>
+main>section:first-child, #tessNotice, #nativeScan, #cameraNext, #imageTools,
+#runOCR, #cancelOCR, #galleryFile, #resetDemo, #diff, #typingStatus,
+#riderAddStatus, #photoName, #sampleNotice, #policyPanel,
+#saveContract, #loadContract, #contractFile, #contractStatus, #tags,
+#selectedReason, #reasonSelect, #add, #newRiderName, #newRiderAmount,
+#newRiderPremium, #addRider, main>section:nth-of-type(4),
+main>section:nth-of-type(2)>.note, main>section:nth-of-type(2)>.row:not(:has(#cameraFile)),
+main>section:nth-of-type(3)>.sub, main>section:nth-of-type(5)>.sub,
+main>section:nth-of-type(6)>.sub, main>section:nth-of-type(6)>.note {display:none!important}
+main>section:nth-of-type(2){text-align:center}
+#cameraFile{cursor:pointer}
+#ocrProgress{display:block!important;text-align:left;line-height:1.6;font-size:14px;padding:12px;background:#e9f4fa;border-radius:10px}
+#photoPreview{max-height:240px}
+#matrix{min-width:650px}
+#riders{text-align:left}.rider:has(input[type=checkbox]:not(:checked)){display:none}
+</style><style id="focus-ocr-ui">
+header small,header p,main>section:first-child,#nativeScan,#tessNotice,#imageTools,#cameraNext,#photoName,#runOCR,#cancelOCR,#resetDemo,#ocrDetails,main>section:nth-of-type(4),footer{display:none!important}
+main>section:nth-of-type(2)>.note,main>section:nth-of-type(2)>.row:not(:has(#cameraFile)){display:none!important}
+main>section:nth-of-type(2)>h2{font-size:18px}main>section:nth-of-type(2) .btn{font-size:18px;padding:20px 26px;min-width:240px}
+main>section:nth-of-type(2)>.row{justify-content:center}#ocrProgress{display:block!important;font-size:14px;padding:12px;background:#eaf4f9;border-radius:10px;text-align:center}
+#photoPreview{max-height:180px}#riders .rider{flex-wrap:wrap}#riders .rider label{min-width:180px}
+</style></head><body><header><small>撮影から自動反映</small><h1>CUBE 保障マトリクス</h1><p>撮影 → 自動読取 → 支払事由 → マトリクス</p></header><main class="wrap"><section style="border-color:#a8cbd3;background:#f6fbfc"><h2>統合操作版</h2><p class="sub">特約の確認・編集、月額保険料の集計、支払対象事由の自由入力、保障マトリクス、データ保存・復元を一画面に統合しています。撮影後に日本語OCRで読み取りを試みます。OCRエンジンの取得に失敗した場合はiPhone標準の「テキストをスキャン」で文字を取り込めます。</p><div class="row" style="flex-wrap:wrap"><a class="btn secondary" href="#ocrDetails" style="text-decoration:none">OCR文字列を取り込む</a><a class="btn secondary" href="#matrix" style="text-decoration:none">マトリクスを見る</a><button class="btn secondary" type="button" onclick="window.print()">画面を印刷</button></div></section><section><h2>設計書を撮影</h2><div class='note' id='tessNotice'><strong>撮影直後に日本語OCRを自動実行</strong><p>撮影または写真選択後に自動認識します。初回はインターネット経由でOCRプログラムと日本語辞書を取得します。画像は端末内で処理する構成です。通信可能なHTTPS公開環境で利用してください。</p></div><div class="note" style="background:#e6f5ed;color:#13563a"><strong>自動OCRが使えない場合の代替手段</strong><p>下の「iPhoneのカメラで文字をスキャン」を押し、表示された入力欄を長押しして「テキストをスキャン」（またはスキャンのアイコン）を選択してください。iPhoneのカメラで文字を認識し、入力欄に挿入すると特約の抽出が自動で始まります。別のショートカットやOCRアプリは不要です。</p><p>※iOSのバージョン・設定・ブラウザによってはメニューが表示されない場合があります。設計書全体を一度に正確に認識できる保証はありません。</p></div><div class="row"><button type="button" class="btn" id="nativeScan">iPhoneのカメラで文字をスキャン</button></div><div class="note" style="background:#e9f5fa;color:#174b63"><strong>iPhone標準OCR連携（画像OCRはショートカットで実行）</strong><p>① iPhoneの「ショートカット」で「写真を選択 → 画像からテキストを抽出」を実行。抽出した文字をURLの末尾「#cube-ocr=」にURLエンコードして付け、「URLを開く」でCUBEへ渡すと自動で特約抽出します（設定方法は同梱の説明書）。</p><p>② URL連携を使わない場合は、ショートカットでクリップボードへコピーし、CUBE画面で「ショートカットOCRの結果を取り込む」を押します。</p><p>③ 特約・保障金額・月額保険料を原本と照合して修正</p><p>④ 下の保障マトリクスを確認</p><strong>ブラウザのOCR対応状況によってはショートカットが必要です。</strong></div><div class="row"><label class="btn" style="position:relative;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;min-height:48px">📷 撮影して自動反映<input type="file" id="cameraFile" accept="image/*" capture="environment" aria-label="撮影して読み取り" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:100px"></label><label class="btn secondary" style="display:none;position:relative;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;min-height:48px">写真を選ぶ<input type="file" id="galleryFile" accept="image/*" aria-label="写真を選ぶ" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:100px"></label></div><div id="photoViewport" style="overflow:auto;max-height:390px;border-radius:12px"><img id="photoPreview" class="preview" alt="選択した設計書の画像プレビュー"></div><div id="imageTools" class="row" style="display:none;margin-top:10px;flex-wrap:wrap"><button type="button" class="btn secondary" id="zoomOut">縮小 −</button><button type="button" class="btn secondary" id="zoomIn">拡大 ＋</button><button type="button" class="btn secondary" id="rotateImage">90°回転</button><button type="button" class="btn secondary" id="resetImage">元に戻す</button></div><div id="cameraNext" class="note" style="display:none;background:#e6f5ed;color:#13563a" role="status"></div><div id="photoName">撮影待ち</div><div class="note">撮影直後に自動OCRを開始します。iPhoneではWebAssembly OCRを利用します（初回はOCRエンジンのダウンロードが必要）。写真の表示と、端末の文字認識機能でコピーしたテキストの貼り付け・抽出は利用できます。実際のお客さまの個人情報は入力しないでください。</div><div class="row" style="margin-top:12px"><button class="btn" id="runOCR" type="button">写真からOCRを実行</button><button class="btn secondary" id="cancelOCR" type="button" disabled>中断</button></div><div id="ocrProgress" class="status" role="status">撮影すると自動で読み取りを開始します。</div><details id="ocrDetails" open style="margin-top:12px"><summary style="font-size:13px;font-weight:700;cursor:pointer">認識結果を確認・修正／テキスト貼り付け</summary><p class="sub">iPhone標準の「テキスト認識表示」で取得した文字を貼り付けます。ブラウザ非対応時はショートカットで文字認識できます。23種類の特約名を候補として照合します。特約名・保障金額・保険料が別行に分かれていても抽出を試みます。読み取れない金額は空欄にします。個人情報は貼り付けないでください。</p><textarea id="ocrText" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="例：総合医療一時金特約 10万円 2,720円 月払"></textarea><div class="row" style="margin-top:8px;flex-wrap:wrap"><button class="btn" id="pasteAndParse" type="button">ショートカットOCRの結果を取り込む</button><button class="btn secondary" id="parseText" style="margin-top:8px">テキストから特約を抽出</button></div><p class="sub">iPhone：写真アプリで設計書を開く → 文字認識表示で文字を選択・コピー → この画面に戻って「ショートカットOCRの結果を取り込む」。Safariがクリップボードの許可を求める場合があります。許可されない場合は上の入力欄を長押しして貼り付けてください。</p><div id="parseStatus" class="status" role="status"></div></details></section><section><h2>読み取った保障内容</h2><div class="grid"><div class="metric"><span>選択中の月額保険料</span><strong id="total">10,214円</strong></div><div class="metric"><span>読取時からの差額</span><strong id="diff">±0円</strong></div></div><p class="sub" id="sampleNotice">撮影した設計書の認識結果がここに表示されます。</p><button class="btn secondary" id="resetDemo" type="button" style="margin:0 0 10px">サンプル契約に戻す</button><p class="sub">保障金額・月額保険料を直接修正できます。未読取は空欄にしてください。比較の基準は読み取り直後の金額です。</p><div id="riders"></div><details style="margin-top:12px"><summary style="font-size:14px;font-weight:700;cursor:pointer">認識されなかった特約を直接追加</summary><p class="sub">OCRで見つからない特約を探し続ける必要はありません。特約名だけでも追加できます。金額が不明なら空欄のままにしてください。</p><div class="grid" style="margin-bottom:8px"><input id="newRiderName" type="text" placeholder="特約名（必須）" aria-label="追加する特約名"><input id="newRiderAmount" type="text" placeholder="保障金額（任意）" aria-label="追加する保障金額"></div><div class="row"><input id="newRiderPremium" type="number" min="0" step="1" inputmode="numeric" placeholder="月額保険料（任意）" aria-label="追加する月額保険料"><button class="btn" id="addRider" type="button">特約を追加</button></div><div id="riderAddStatus" class="status" role="status"></div></details></section><section><h2>契約データの端末内バックアップ・復元</h2><p class="sub">入力・修正した特約、保障額、保険料、選択状態、支払対象事由をJSONファイルとして端末内に保存・復元できます。画像は保存ファイルに含みません。個人情報は入力しないでください。ファイルの保管・共有には注意してください。</p><div class="row" style="flex-wrap:wrap"><button type="button" class="btn" id="saveContract">現在の内容を保存</button><button type="button" class="btn secondary" id="loadContract">保存ファイルを復元</button><input id="contractFile" type="file" accept="application/json,.json" hidden></div><div class="status" id="contractStatus" role="status"></div></section><section><h2>③ 支払事由</h2><label class="sub" for="reasonCategory">大項目</label><select id="reasonCategory"><option value="疾病">疾病</option><option value="入院">入院</option><option value="手術">手術</option><option value="がん">がん</option><option value="三大疾病">三大疾病</option><option value="障害・介護">障害・介護</option><option value="死亡">死亡</option><option value="災害・傷害">災害・傷害</option><option value="その他">その他</option></select><label class="sub" for="reasonSelect">具体的な事由</label><select id="reasonSelect" aria-label="支払対象事由"></select><p class="sub">選択肢を探す必要はありません。見つからなければ下に直接入力できます。入力中からマトリクスに反映されます。「追加」で次回用に保存します。</p><div class="row"><input id="custom" type="text" placeholder="例：脳梗塞で20日間入院" aria-label="支払対象事由を直接入力"><button class="btn" id="add">追加</button></div><div class="status" id="typingStatus" role="status"></div><div class="tags" id="tags"></div><p class="sub" id="selectedReason"></p></section><section><h2>保障マトリクス</h2><p class="sub">横に特約、縦に支払対象事由を配置。左右にスクロールできます。自由入力した事由もすぐに行として追加されます。</p><div class="scroll"><table id="matrix"></table></div><details id="policyPanel" style="margin-top:12px"><summary>約款の確認（根拠資料）</summary><p class="sub">対象契約の約款・特約条項を貼り付けると、関連する語句の記載箇所を検索できます。支払可否は自動確定しません。</p><textarea id="policyText" placeholder="該当する約款の条文を貼り付け"></textarea><button class="btn secondary" id="policySearch" type="button">関連条文を検索</button><div id="policyResult" class="status" aria-live="polite"></div></details><div class="note">「未照合」は支払いが確定した意味ではありません。実際の支払可否は契約時期に対応する約款、疾病・治療の詳細などの確認が必要です。表の「—」も不支払いを断定するものではありません。</div></section></main><footer>CUBE 保障マトリクス｜統合操作版｜OCRは端末内WebAssembly・標準スキャン連携｜原本照合必須</footer><script>
+let riders=[];
+const defaults=['がんによる入院','がんの薬物治療','心疾患による入院','手術','認知症・介護'];
+let customReasons=[];try{customReasons=JSON.parse(localStorage.getItem('cubeReasons')||'[]').filter(x=>typeof x==='string').slice(0,50)}catch(e){}
+let reasons=[...new Set([...customReasons,...defaults])],selected=defaults[0],draftReason="",enabled=riders.map(()=>true);let imported=true;let baseline=0;let baselineKnown=false;
+const yen=n=>n.toLocaleString('ja-JP')+'円';const escapeAttr=s=>String(s??'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');const el=id=>document.getElementById(id);
+function render(){const total=riders.reduce((s,r,i)=>s+(enabled[i]&&Number.isFinite(r[2])?r[2]:0),0);el('total').textContent=yen(total);const d=total-baseline;el('diff').textContent=baselineKnown?(d===0?'±0円':(d>0?'+':'')+yen(d)):'基準額に未読取あり';
+el('sampleNotice').textContent=imported?'読み取り候補・手入力の金額を表示中。未読取の金額は合計に含まれません。':'撮影した設計書の認識結果がここに表示されます。';el('riders').innerHTML=riders.map((r,i)=>`<div class="rider"><input type="checkbox" id="r${i}" ${enabled[i]?'checked':''}><label for="r${i}">${escapeAttr(r[0])}</label><div class="editamount"><span>保障金額</span><input type="text" id="a${i}" aria-label="${escapeAttr(r[0])}の保障金額" value="${escapeAttr(r[1])}" placeholder="未読取"></div><div class="editpremium"><input type="number" min="0" max="99999999" step="1" inputmode="numeric" aria-label="${escapeAttr(r[0])}の月額保険料" id="p${i}" placeholder="未読取" value="${Number.isFinite(r[2])?r[2]:''}"><span>円/月</span></div></div>`).join('');riders.forEach((_,i)=>el('r'+i).addEventListener('change',e=>{enabled[i]=e.target.checked;render()}));riders.forEach((_,i)=>el('a'+i).addEventListener('change',e=>{riders[i][1]=e.target.value.trim().slice(0,60);render()}));riders.forEach((_,i)=>el('p'+i).addEventListener('change',e=>{const v=e.target.value.trim();if(v==='' ){riders[i][2]=null}else if(/^\d+$/.test(v)&&Number(v)<=99999999){riders[i][2]=Number(v)}else{alert('保険料は0以上の整数で入力してください');render();return}render()}));
+const activeReason=draftReason.trim()||selected;const sel=el('reasonSelect');sel.innerHTML='';reasons.forEach(x=>{const o=document.createElement('option');o.value=x;o.textContent=x;sel.appendChild(o)});sel.value=selected;el('tags').innerHTML='';reasons.slice(0,10).forEach(x=>{const b=document.createElement('button');b.className='tag'+(x===selected?' on':'');b.textContent=x;b.addEventListener('click',()=>{selected=x;draftReason='';el('custom').value='';render()});el('tags').appendChild(b)});el('selectedReason').textContent='現在の確認対象：'+activeReason;el('typingStatus').textContent=draftReason.trim()?'入力中の事由をマトリクスに仮表示しています。保存する場合は「追加」を押してください。':'';
+const table=el('matrix');table.replaceChildren();const head=document.createElement('tr');['支払対象事由',...riders.filter((_,i)=>enabled[i]).map(r=>r[0])].forEach(s=>{const th=document.createElement('th');th.textContent=s;head.appendChild(th)});table.appendChild(head);const amounts=document.createElement('tr');const firstAmount=document.createElement('td');firstAmount.textContent='保障金額';amounts.appendChild(firstAmount);riders.forEach((r,i)=>{if(!enabled[i])return;const td=document.createElement('td');td.textContent=r[1]||'未読取';amounts.appendChild(td)});table.appendChild(amounts);
+const displayReasons=[activeReason,...reasons.filter(x=>x!==activeReason)];displayReasons.forEach(reason=>{const tr=document.createElement('tr');if(reason===activeReason)tr.className='focus-row';const td=document.createElement('td');td.textContent=(el('reasonCategory')?.value||'疾病')+'｜'+reason;tr.appendChild(td);riders.forEach((r,i)=>{if(!enabled[i])return;const cell=document.createElement('td');const mark=document.createElement('span');mark.className='check';mark.textContent='未照合';cell.appendChild(mark);tr.appendChild(cell)});table.appendChild(tr)});
+}
+el('reasonCategory').addEventListener('change',()=>render());
+el('policySearch').onclick=()=>{const text=el('policyText').value;const reason=(draftReason.trim()||selected);const tokens=[...new Set([...riders.filter((_,i)=>enabled[i]).map(r=>r[0]),reason,el('reasonCategory').value].filter(x=>x.length>=2))];const lines=text.split(/[\n。]/).map(x=>x.trim()).filter(Boolean);const found=lines.filter(x=>tokens.some(t=>x.includes(t))).slice(0,12);el('policyResult').textContent=found.length?'関連する記載候補（要確認）：\n'+found.join('\n'): '該当箇所は見つかりません。約款の版と対象特約をご確認ください。';el('policyResult').style.whiteSpace='pre-wrap';};
+el('resetDemo').onclick=()=>{riders=[['総合医療一時金','10万円',2720],['日数連動入院','日額1万円',1683],['生活習慣病入院','10万円',501],['女性医療一時金','5万円',1011],['特定3疾病継続','100万円',2235],['LiVガード','100万円',704],['がん薬物治療','月額10万円',1360]];enabled=riders.map(()=>true);imported=false;baseline=10214;baselineKnown=true;el('ocrText').value='';el('parseStatus').textContent='サンプル契約に戻しました。';render()};el('reasonSelect').addEventListener('change',e=>{selected=e.target.value;draftReason='';el('custom').value='';render()});el('custom').addEventListener('input',e=>{draftReason=e.target.value.slice(0,70);render()});function add(){const x=el('custom').value.trim().replace(/\s+/g,' ');if(!x)return;if(x.length>70){alert('70文字以内で入力してください');return}const found=reasons.find(r=>r.normalize('NFKC').toLowerCase()===x.normalize('NFKC').toLowerCase());selected=found||x;if(!found){reasons.unshift(x);customReasons=[x,...customReasons].slice(0,50);try{localStorage.setItem('cubeReasons',JSON.stringify(customReasons))}catch(e){}}el('custom').value='';draftReason='';render()}
+el('addRider').addEventListener('click',()=>{const name=el('newRiderName').value.trim().slice(0,70);const amount=el('newRiderAmount').value.trim().slice(0,60);const raw=el('newRiderPremium').value.trim();const status=el('riderAddStatus');if(!name){status.textContent='特約名を入力してください。';return}if(riders.some(r=>r[0].normalize('NFKC')===name.normalize('NFKC'))){status.textContent='同名の特約がすでにあります。上の一覧から編集できます。';return}if(raw&&!/^\d+$/.test(raw)){status.textContent='保険料は0以上の整数で入力してください。';return}const premium=raw===''?null:Number(raw);if(premium!==null&&(!Number.isSafeInteger(premium)||premium>99999999)){status.textContent='保険料の値を確認してください。';return}riders.push([name,amount,premium]);enabled.push(true);imported=true;baselineKnown=false;el('newRiderName').value='';el('newRiderAmount').value='';el('newRiderPremium').value='';status.textContent='「'+name+'」を追加しました。マトリクスの右端に表示されます。';render()});
+el('add').addEventListener('click',add);el('custom').addEventListener('keydown',e=>{if(e.key==='Enter')add()});let previewURL=null;let imageScale=1;let imageAngle=0;
+function updateImageTransform(){const img=el('photoPreview');img.style.maxHeight='none';img.style.maxWidth='none';img.style.width=(100*imageScale)+'%';img.style.transform='rotate('+imageAngle+'deg)';img.style.transformOrigin='center center';}
+el('zoomIn').onclick=()=>{imageScale=Math.min(4,Math.round((imageScale+.25)*100)/100);updateImageTransform()};
+el('zoomOut').onclick=()=>{imageScale=Math.max(.5,Math.round((imageScale-.25)*100)/100);updateImageTransform()};
+el('rotateImage').onclick=()=>{imageAngle=(imageAngle+90)%360;updateImageTransform()};
+el('resetImage').onclick=()=>{imageScale=1;imageAngle=0;updateImageTransform()};['cameraFile','galleryFile'].forEach(id=>el(id).addEventListener('change',e=>{const f=e.target.files?.[0];if(f){ocrAborted=true;photoOCRJob++;el('parseStatus').textContent='画像を選択しました。既存の特約データは保持しています。文字認識済みテキストを貼り付けるか、特約を直接追加できます。';if(previewURL)URL.revokeObjectURL(previewURL);previewURL=URL.createObjectURL(f);el('photoPreview').src=previewURL;el('photoPreview').style.display='block';el('imageTools').style.display='flex';imageScale=1;imageAngle=0;updateImageTransform();el('photoName').textContent='画像を選択しました。既存の契約データは保持しています。OCRボタンで端末内認識を試行できます。';selectedImageFile=f;riders=[];enabled=[];imported=true;baseline=0;baselineKnown=false;el('ocrText').value='';render();progress.style.background='#eef6fb';progress.style.color='#34576d';progress.textContent='写真を受け取りました。日本語OCRを自動実行します…';if(browserOCRSupported || tesseractCapable){setTimeout(()=>runPhotoOCR(),0)}else{const next=el('cameraNext');next.style.display='block';next.textContent='撮影画像を取り込みました。OCRエンジンを利用できない場合は、次に下の入力欄を長押しし「テキストをスキャン」を選択すると、iPhone標準OCRで読み取った文字が自動的に特約へ反映されます。';el('ocrDetails').open=true;el('ocrText').scrollIntoView({behavior:'smooth',block:'center'});el('ocrText').focus();}}e.target.value=''}));
+// 保険料と保障額は異なる単位・位置で読み取る。確証がない場合は空欄にする。
+function extractAmount(line){
+  const clean=line.normalize('NFKC');
+  const matches=[...clean.matchAll(/(?:日額|月額|年金額|通算限度額)?\s*[0-9][0-9,]*(?:\.[0-9]+)?\s*(?:億|万|千)?\s*円/g)].map(m=>({value:m[0].trim(),index:m.index}));
+  // 月払/保険料の近傍は保障額として扱わない。候補が複数なら先頭の明確な保障単位を優先。
+  const candidates=matches.filter(m=>/億|万|千|日額|月額|年金額|通算限度額/.test(m.value)&&!/(?:保険料|月払)\s*$/.test(clean.slice(Math.max(0,m.index-8),m.index)));
+  return candidates.length?candidates[0].value.replace(/\s+/g,''):'';
+}
+const riderCatalog=[
+  {name:"生活障害収入保障特約",re:/生活障害収入保障/i},
+  {name:"生活障害保障充実特約",re:/生活障害保障充実/i},
+  {name:"収入パスポート特約",re:/収入パスポート/i},
+  {name:"収入保障特約",re:/収入保障特約/i},
+  {name:"定期保険特約",re:/定期保険特約/i},
+  {name:"認知症PLUS特約",re:/認知症\s*(?:PLUS|プラス)/i},
+  {name:"LiVガード特約",re:/LiV\s*ガード|リブガード/i},
+  {name:"保険料払込免除特約",re:/保険料払込免除/i},
+  {name:"リビング・ニーズ特約",re:/リビング[・･\s-]*ニーズ/i},
+  {name:"保険契約者代理特約",re:/保険契約者代理/i},
+  {name:"被保険者代理特約",re:/被保険者代理/i},
+  {name:"健康増進乗率適用特約",re:/健康増進乗率適用/i},
+  {name:"災害割増特約",re:/災害割増/i},
+  {name:"傷害特約(本人型)",re:/傷害特約/i},
+  {name:"傷害損傷特約",re:/傷害損傷/i},
+  {name:"総合医療一時金特約",re:/総合医療一時金/i},
+  {name:"日数連動入院特約",re:/日数連動入院/i},
+  {name:"生活習慣病入院一時金特約",re:/生活習慣病入院/i},
+  {name:"女性医療一時金特約",re:/女性医療一時金/i},
+  {name:"特定3疾病継続保障特約",re:/特定[３3三]疾病継続/i},
+  {name:"がん診断継続保障特約",re:/がん診断継続/i},
+  {name:"がん薬物治療特約",re:/がん薬物治療/i},
+  {name:"新先進医療・患者申出療養特約",re:/新先進医療|患者申出療養/i}
+];
+const patterns=riderCatalog.map(x=>x.re);
+function extractPremium(line){
+  const clean=line.normalize('NFKC');
+  // 「月払」「保険料」が数字の近くにある場合のみ保険料として扱う。
+  // 「10万円 月払」のような保障額の誤認を避ける。
+  const patterns=[
+    /(?:月払(?:保険料)?|月額保険料|保険料)\s*[:：]?\s*([0-9][0-9,]*)\s*円/g,
+    /([0-9][0-9,]*)\s*円\s*(?:月払(?:保険料)?|月額保険料|保険料)/g
+  ];
+  for(const re of patterns){
+    for(const match of clean.matchAll(re)){
+      const n=Number(match[1].replace(/,/g,''));
+      if(Number.isSafeInteger(n)&&n>=0&&n<=99999999)return n;
+    }
+  }
+  // 表形式OCRでは保険料欄の数値だけが特約名の後に現れる場合がある。
+  // 「10万円 2,720円」のように保障額が明確に先行し、末尾が単位「円」の
+  // 整数である場合に限って保険料候補として採用する。
+  // 単独の「100万円」「月額10万円」からは保険料を推測しない。
+  const coverage=[...clean.matchAll(/(?:日額|月額|年金額|通算限度額)?\s*[0-9][0-9,]*(?:\.[0-9]+)?\s*(?:億|万|千)\s*円/g)];
+  if(coverage.length){
+    const lastCoverage=coverage[coverage.length-1];
+    const after=clean.slice(lastCoverage.index+lastCoverage[0].length);
+    const trailing=[...after.matchAll(/(?:^|[\s　:：|｜])([0-9][0-9,]*)\s*円(?=$|[\s　|｜])/g)];
+    if(trailing.length===1){
+      const n=Number(trailing[0][1].replace(/,/g,''));
+      if(Number.isSafeInteger(n)&&n>=0&&n<=99999999)return n;
+    }
+  }
+  return null;
+}
+el('parseText').onclick=()=>{
+  const lines=el('ocrText').value.split(/\r?\n/);
+  let count=0,unknown=0;
+  // 前の契約の保障金額・保険料を引き継がない。
+  const next=riderCatalog.map(item=>[item.name,'',null]);
+  const active=next.map(()=>false);
+  // 同じ特約の文字と金額が複数行に分かれた場合、次の特約までを一塊にする。
+  // 同一行に複数特約がある場合も、特約名の出現位置で区切る。
+  let current=-1,block=[];
+  function flushBlock(){
+    if(current<0)return;
+    const joined=block.join(' ');
+    if(!/付加していません|付加なし|未加入/.test(joined)){
+      active[current]=true;
+      const amount=extractAmount(joined);
+      if(amount)next[current][1]=amount;
+      const premium=extractPremium(joined);
+      if(premium!==null)next[current][2]=premium;
+    }
+    current=-1;block=[];
+  }
+  for(const rawLine of lines){
+    const line=rawLine.normalize('NFKC');
+    const hits=[];
+    for(let i=0;i<patterns.length;i++){
+      const re=new RegExp(patterns[i].source,patterns[i].flags.replace('g',''));
+      const m=re.exec(line);
+      if(m)hits.push({index:i,start:m.index,end:m.index+m[0].length});
+    }
+    hits.sort((a,b)=>a.start-b.start||b.end-a.end);
+    const filtered=hits.filter((hit,j)=>!hits.some((other,k)=>k!==j&&other.start<=hit.start&&other.end>=hit.end&&(other.end-other.start)>(hit.end-hit.start)));
+    if(filtered.length){
+      flushBlock();
+      filtered.forEach((hit,j)=>{
+        const stop=j+1<filtered.length?filtered[j+1].start:line.length;
+        current=hit.index;
+        block=[line.slice(hit.start,stop)];
+        if(j+1<filtered.length)flushBlock();
+      });
+    }else if(current>=0&&line.trim()){
+      // 別の特約名が出るまで最大4行を連結。無関係な文章は取り込まない。
+      if(block.length>=4)flushBlock();else block.push(line);
+    }
+  }
+  flushBlock();
+  if(!active.some(Boolean)){
+    el('parseStatus').textContent='対応する特約名を検出できませんでした。現在の表示は変更していません。';return;
+  }
+  riders=next;
+  enabled=active;imported=true;
+  baseline=next.reduce((sum,r,i)=>sum+(active[i]&&Number.isFinite(r[2])?r[2]:0),0);
+  baselineKnown=active.every((v,i)=>!v||Number.isFinite(next[i][2]));
+  count=active.filter((v,i)=>v&&Number.isFinite(next[i][2])).length;
+  unknown=active.filter((v,i)=>v&&!Number.isFinite(next[i][2])).length;
+  el('parseStatus').textContent=`${active.filter(Boolean).length}件を候補として反映。保険料抽出${count}件・未読取${unknown}件。未読取の金額は推測していません。必ず原本と照合してください。`;
+  render();
+};riders=[];enabled=[];imported=true;baseline=0;baselineKnown=false;render();
+// Explicit, offline-only backup. No network APIs or image data are used.
+const contractFile=el('contractFile');
+el('saveContract').onclick=()=>{
+ const record={format:'CUBE-local-contract',version:1,savedAt:new Date().toISOString(),riders:riders.map((r,i)=>({name:r[0],benefit:r[1]||'',premium:Number.isFinite(r[2])?r[2]:null,included:!!enabled[i]})),reasons:reasons.slice(0,100),selectedReason:selected,baseline:baselineKnown?baseline:null};
+ const blob=new Blob([JSON.stringify(record,null,2)],{type:'application/json'});
+ const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='CUBE_契約確認データ.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ el('contractStatus').textContent='保存ファイルを作成しました。画像は含まれません。';
+};
+el('loadContract').onclick=()=>contractFile.click();
+contractFile.onchange=async e=>{
+ const f=e.target.files?.[0];if(!f)return;
+ try{
+  if(f.size>300000)throw Error('ファイルが大きすぎます');
+  const data=JSON.parse(await f.text());
+  if(data.format!=='CUBE-local-contract'||data.version!==1||!Array.isArray(data.riders)||data.riders.length>100)throw Error('CUBE保存ファイルではありません');
+  const next=data.riders.map(r=>{
+   if(!r||typeof r.name!=='string'||r.name.length<1||r.name.length>100||typeof r.benefit!=='string'||r.benefit.length>100||!(r.premium===null||(Number.isSafeInteger(r.premium)&&r.premium>=0&&r.premium<=100000000))||typeof r.included!=='boolean')throw Error('特約データの形式が不正です');
+   return [r.name,r.benefit,r.premium];
+  });
+  if(!Array.isArray(data.reasons)||data.reasons.length>100||data.reasons.some(x=>typeof x!=='string'||x.length>100))throw Error('事由データの形式が不正です');
+  riders=next;enabled=data.riders.map(r=>r.included);reasons=[...new Set([...data.reasons,...defaults])];selected=typeof data.selectedReason==='string'&&reasons.includes(data.selectedReason)?data.selectedReason:defaults[0];draftReason='';el('custom').value='';imported=true;
+  baselineKnown=Number.isSafeInteger(data.baseline)&&data.baseline>=0;baseline=baselineKnown?data.baseline:0;
+  if(previewURL){URL.revokeObjectURL(previewURL);previewURL=null;}el('photoPreview').removeAttribute('src');el('photoPreview').style.display='none';el('imageTools').style.display='none';
+  el('photoName').textContent='保存ファイルから契約データを復元しました（画像は含まれません）。';
+  render();el('contractStatus').textContent=next.length+'特約を復元しました。金額は原本と照合してください。';
+ }catch(err){el('contractStatus').textContent='復元できません：'+err.message}
+ finally{e.target.value=''}
+};
+</script>
+<script>
+// Live Text is performed by the phone's own Photos app; only text explicitly copied by the user is read.
+async function importClipboardOCR(){
+ const status=document.getElementById('parseStatus');
+ try{
+  if(!navigator.clipboard || !navigator.clipboard.readText)throw new Error('この画面ではクリップボードの直接読取が許可されていません');
+  const value=await navigator.clipboard.readText();
+  if(!value.trim()){status.textContent='コピーした文字がありません。写真アプリで文字をコピーしてください。';return}
+  document.getElementById('ocrText').value=value;
+  document.getElementById('ocrDetails').open=true;
+  document.getElementById('parseText').click();
+ }catch(e){
+  document.getElementById('ocrDetails').open=true;
+  document.getElementById('ocrText').focus();
+  status.textContent='クリップボードを読み取れません。上の入力欄を長押しして「ペースト」し、「テキストから特約を抽出」を押してください。';
+ }
+}
+document.getElementById('pasteAndParse').addEventListener('click',importClipboardOCR);
+// iOS Safari: 編集可能なテキスト欄のコンテキストメニューにある「テキストをスキャン」を使う。
+// 文字はiOSが直接入力欄に挿入し、ページはその文字をローカルで解析する。
+document.getElementById('nativeScan').addEventListener('click',()=>{
+ const field=document.getElementById('ocrText');
+ document.getElementById('ocrDetails').open=true;
+ field.focus();
+ document.getElementById('parseStatus').textContent='入力欄を長押しし、iPhoneの「テキストをスキャン」を選択してください。読み取った文字は自動で解析します。';
+ field.scrollIntoView({block:'center',behavior:'smooth'});
+});
+let scanInputTimer;
+document.getElementById('ocrText').addEventListener('input',()=>{
+ clearTimeout(scanInputTimer);
+ scanInputTimer=setTimeout(()=>{
+  const value=document.getElementById('ocrText').value;
+  if(value.length>=12 && /特約|保障|保険料/.test(value)){
+   document.getElementById('parseText').click();
+   document.getElementById('parseStatus').textContent+='（入力された文字から自動抽出）';
+  }
+ },1100);
+});
+
+// ショートカットから「URLを開く」で渡された文字をページ読み込み時に直接反映する。
+// #cube-ocr=... はフラグメントであり、HTTPリクエストには含まれない。
+// 個人情報を含むテキストをURLに入れない運用を前提とする。
+function importShortcutFragment(){
+  const hash=window.location.hash||'';
+  if(!hash.startsWith('#cube-ocr='))return false;
+  try{
+    const value=decodeURIComponent(hash.slice('#cube-ocr='.length).replace(/\+/g,'%20'));
+    // 認識文字列をURL履歴に残さない（HTTPリクエストにも送らない）。
+    try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}
+    if(!value.trim()||value.length>50000)throw Error('文字数が不正です');
+    document.getElementById('ocrText').value=value;
+    document.getElementById('ocrDetails').open=true;
+    // URLに認識文字を残さない。URLからは消すが、ブラウザ履歴や画面の扱いに注意。
+    history.replaceState(null,'',location.pathname+location.search);
+    document.getElementById('parseText').click();
+    document.getElementById('ocrProgress').textContent='ショートカットからOCR文字列を受信し、特約抽出を実行しました。';
+    return true;
+  }catch(err){
+    history.replaceState(null,'',location.pathname+location.search);
+    document.getElementById('parseStatus').textContent='ショートカットからの文字列を読み込めませんでした。';
+    return false;
+  }
+}
+importShortcutFragment();
+window.addEventListener('hashchange',importShortcutFragment);
+
+// ブラウザ標準の端末内OCR。外部サーバーへの画像送信は行わない。
+const ocrRun=document.getElementById('runOCR');
+let selectedImageFile=null;
+let ocrAborted=false;
+const progress=document.getElementById('ocrProgress');
+const browserOCRSupported=typeof window.TextDetector==='function';
+const tesseractCapable=typeof WebAssembly==='object' && typeof Worker==='function';
+let tesseractWorker=null, loadingTesseract=null;
+progress.textContent='写真を撮影するとOCRを自動開始します。初回はOCRエンジンを取得します。';
+ocrRun.disabled=!(browserOCRSupported||tesseractCapable);
+el('cancelOCR').disabled=!(browserOCRSupported||tesseractCapable);
+el('cancelOCR').onclick=()=>{ocrAborted=true;progress.textContent='OCRを中断しました。'};
+// 画像全体と上下分割をOCRし、重複する認識行を除外する。
+// TextDetectorは対応ブラウザのみ。iPhone Safariでは標準ショートカット連携を使用。
+// 同一の文字列でも別の特約行なら削除しない。位置情報で重複を統合する。
+function ocrItems(blocks,offsetX,offsetY,scale){
+ return blocks.map(b=>({text:String(b.rawValue||'').trim(),x:(Number(b.boundingBox?.x)||0)/scale+offsetX,y:(Number(b.boundingBox?.y)||0)/scale+offsetY,w:(Number(b.boundingBox?.width)||0)/scale,h:(Number(b.boundingBox?.height)||0)/scale})).filter(b=>b.text);
+}
+function mergeOCRItems(items){
+ // OCRエンジンが「特約名」「10万円」「2,720円」を別ブロックで返しても
+ // 座標で同じ印刷行へ復元し、金額が隣の特約に移らないようにする。
+ const normalized=t=>t.normalize('NFKC').replace(/[\s　,，。、・]/g,'').toLowerCase();
+ const unique=[];
+ for(const item of items){
+  const key=normalized(item.text);
+  if(key.length<2)continue;
+  const duplicate=unique.some(p=>normalized(p.text)===key && Math.abs(p.y-item.y)<Math.max(14,p.h,item.h)*.75 && Math.abs(p.x-item.x)<Math.max(28,p.w,item.w)*.5);
+  if(!duplicate)unique.push(item);
+ }
+ // 同じ高さにある文字片を一行にまとめる。位置が重なる補正OCRの
+ // 結果を別行として増やさないため、行の中心座標を基準にする。
+ unique.sort((a,b)=>(a.y+a.h/2)-(b.y+b.h/2)||a.x-b.x);
+ const rows=[];
+ for(const item of unique){
+  const center=item.y+item.h/2;
+  let target=null, distance=Infinity;
+  for(const row of rows){
+   const tolerance=Math.max(7,Math.min(18,Math.min(row.height||12,item.h||12)*.65));
+   const d=Math.abs(center-row.center);
+   if(d<=tolerance && d<distance){target=row;distance=d;}
+  }
+  if(!target){target={center,height:item.h||12,items:[]};rows.push(target);}
+  target.items.push(item);
+  target.center=target.items.reduce((sum,b)=>sum+b.y+b.h/2,0)/target.items.length;
+ }
+ return rows.sort((a,b)=>a.center-b.center).map(row=>
+  row.items.sort((a,b)=>a.x-b.x).map(b=>b.text).join(' ')
+ );
+}
+// 画像は端末内canvasでのみ補正。OCRへ渡す前にグレースケールと局所コントラストを調整する。
+function enhanceOCRCanvas(canvas){
+ const ctx=canvas.getContext('2d',{willReadFrequently:true});
+ const img=ctx.getImageData(0,0,canvas.width,canvas.height),d=img.data;
+ const hist=new Uint32Array(256);let total=0;
+ for(let i=0;i<d.length;i+=4){if(d[i+3]===0)continue;const y=Math.round(.299*d[i]+.587*d[i+1]+.114*d[i+2]);hist[y]++;total++;}
+ if(!total)return canvas;
+ const cut=Math.max(1,Math.floor(total*.012));let acc=0,lo=0,hi=255;
+ for(let k=0;k<256;k++){acc+=hist[k];if(acc>=cut){lo=k;break;}}
+ acc=0;for(let k=255;k>=0;k--){acc+=hist[k];if(acc>=cut){hi=k;break;}}
+ const range=Math.max(35,hi-lo);
+ for(let i=0;i<d.length;i+=4){const y=.299*d[i]+.587*d[i+1]+.114*d[i+2];const v=Math.max(0,Math.min(255,Math.round((y-lo)*255/range)));d[i]=d[i+1]=d[i+2]=v;}
+ ctx.putImageData(img,0,0);return canvas;
+}
+async function scanRegions(detector,source){
+ const w=source.width,h=source.height;
+ // 文字が小さい設計書は列・行の分割画像も認識する。
+ const regions=[[0,0,w,h]];
+ if(h>=600){const half=Math.ceil(h/2);regions.push([0,0,w,Math.min(h,half+65)],[0,Math.max(0,half-65),w,h-Math.max(0,half-65)]);}
+ if(w>=1100){const mid=Math.ceil(w/2);regions.push([0,0,Math.min(w,mid+50),h],[Math.max(0,mid-50),0,w-Math.max(0,mid-50),h]);}
+ const items=[];
+ for(let i=0;i<regions.length;i++){
+  if(ocrAborted)break;
+  const [x,y,cw,ch]=regions[i];
+  const scale=Math.min(2,Math.max(1,1600/Math.max(cw,ch)));
+  const canvas=document.createElement('canvas');canvas.width=Math.round(cw*scale);canvas.height=Math.round(ch*scale);
+  const ctx=canvas.getContext('2d',{willReadFrequently:true});
+  if(!ctx)throw Error('画像処理を初期化できません');
+  ctx.drawImage(source,x,y,cw,ch,0,0,canvas.width,canvas.height);
+  progress.textContent='端末内OCRを実行中… '+(i+1)+' / '+regions.length+'領域';
+  const result=await detector.detect(canvas);
+  items.push(...ocrItems(result,x,y,scale));
+  // 低コントラストの小文字対策。原画像の結果も保持し、位置で重複を統合する。
+  if(!ocrAborted){
+   enhanceOCRCanvas(canvas);
+   progress.textContent='画像補正後のOCR… '+(i+1)+' / '+regions.length+'領域';
+   const enhanced=await detector.detect(canvas);
+   items.push(...ocrItems(enhanced,x,y,scale));
+  }
+  canvas.width=0;canvas.height=0;
+ }
+ return mergeOCRItems(items);
+}
+// Safariでも動作可能なWebAssembly日本語OCRを使用する。
+// プログラムと辞書は外部CDNから取得するが、写真はワーカー内で処理しアップロードしない。
+function loadOCRScript(){
+ if(window.Tesseract)return Promise.resolve();
+ if(loadingTesseract)return loadingTesseract;
+ loadingTesseract=(async()=>{
+  const urls=[
+   'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js',
+   'https://unpkg.com/tesseract.js@5.1.1/dist/tesseract.min.js'
+  ];
+  let lastError;
+  for(const url of urls){
+   try{
+    await new Promise((resolve,reject)=>{
+     const script=document.createElement('script');script.src=url;script.async=true;
+     script.onload=resolve;script.onerror=()=>{script.remove();reject(Error('OCRプログラム取得失敗'))};
+     document.head.appendChild(script);
+    });
+    if(window.Tesseract)return;
+   }catch(err){lastError=err}
+  }
+  throw Error('日本語OCRを読み込めません。SafariでHTTPSの公開ページを開き、通信を確認してください。'+(lastError?.message||''));
+ })().catch(e=>{loadingTesseract=null;throw e});
+ return loadingTesseract;
+}
+async function runTesseractOCR(bitmap){
+ progress.textContent='日本語OCRを起動しています…';
+ await loadOCRScript();
+ if(!tesseractWorker){
+  const endpoints=[
+   {workerPath:'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/worker.min.js',corePath:'https://cdn.jsdelivr.net/npm/tesseract.js-core@5.0.0'},
+   {workerPath:'https://unpkg.com/tesseract.js@5.1.1/dist/worker.min.js',corePath:'https://unpkg.com/tesseract.js-core@5.0.0'}
+  ];
+  let last;
+  for(const endpoint of endpoints){
+   try{
+    tesseractWorker=await Tesseract.createWorker('jpn',1,{
+     ...endpoint,langPath:'https://tessdata.projectnaptha.com/4.0.0',
+     workerBlobURL:true,
+     logger:m=>{if(m.status)progress.textContent='日本語OCR：'+m.status+' '+(Number.isFinite(m.progress)?Math.round(m.progress*100)+'%':'')}
+    });
+    break;
+   }catch(e){last=e;tesseractWorker=null;}
+  }
+  if(!tesseractWorker)throw Error('OCRエンジンを起動できません: '+(last?.message||'読み込み失敗'));
+ }
+ const canvas=document.createElement('canvas');
+ const scale=Math.min(2.5,3400/Math.max(bitmap.width,bitmap.height));
+ canvas.width=Math.max(1,Math.round(bitmap.width*scale));canvas.height=Math.max(1,Math.round(bitmap.height*scale));
+ const ctx=canvas.getContext('2d',{willReadFrequently:true});
+ ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);
+ ctx.drawImage(bitmap,0,0,canvas.width,canvas.height);
+ const recognize=async (image,label)=>{
+  if(ocrAborted)return [];
+  progress.textContent=label;
+  const result=await tesseractWorker.recognize(image);
+  return String(result?.data?.text||'').split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+ };
+ try{
+  let lines=await recognize(canvas,'設計書全体をOCR中…');
+  if(ocrAborted)return [];
+  // 全体画像で特約の読み取りが不足した場合は、上半分と下半分を拡大して再解析する。
+  const count=lines.filter(x=>/特約|保障|入院|医療|がん|認知症|収入/.test(x)).length;
+  if(count<6 && canvas.height>=700){
+   const pieces=[];
+   for(let i=0;i<2;i++){
+    const part=document.createElement('canvas');
+    part.width=canvas.width;
+    const y=Math.floor(canvas.height*i/2), h=Math.ceil(canvas.height/2);
+    part.height=Math.min(h,canvas.height-y);
+    part.getContext('2d').drawImage(canvas,0,y,canvas.width,part.height,0,0,part.width,part.height);
+    pieces.push(...await recognize(part,'小さい文字を拡大再解析中… '+(i+1)+'/2'));
+    part.width=0;part.height=0;
+    if(ocrAborted)return [];
+   }
+   // 全体OCRと分割OCRの両方を保持し、同一文字列のみ重複を除く。
+   // 分割領域を優先する。全体認識と分割認識を混ぜると同じ特約が二重になるため、
+   // 分割で特約が増えた場合は分割結果だけを採用する。
+   const partCount=pieces.filter(x=>/特約|保障|入院|医療|がん|認知症|収入/.test(x)).length;
+   if(partCount>count)lines=pieces;
+  }
+  return lines;
+ }finally{canvas.width=0;canvas.height=0;}
+}
+async function openImageForOCR(file){
+ if(typeof createImageBitmap==='function'){try{return await createImageBitmap(file)}catch(e){}}
+ const url=URL.createObjectURL(file);try{const img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(Error('画像の読み込みに失敗'));img.src=url});return img}finally{URL.revokeObjectURL(url)}
+}
+let photoOCRJob=0;
+async function runPhotoOCR(){
+ const thisJob=++photoOCRJob;
+ if(!browserOCRSupported && !tesseractCapable){progress.textContent='この端末ではOCRが利用できません。';return;}
+ if(!selectedImageFile){progress.textContent='先に写真を撮影してください。';return;}
+ ocrAborted=false;ocrRun.disabled=true;progress.textContent='画像を読み込んでいます…';progress.scrollIntoView({behavior:'smooth',block:'center'});
+ let bitmap=null;
+ try{
+  bitmap=await openImageForOCR(selectedImageFile);
+  let lines=[];
+  if(browserOCRSupported){try{lines=await scanRegions(new TextDetector(),bitmap)}catch(err){progress.textContent='標準OCR失敗。日本語OCRへ切り替えます…'}}
+  if((!lines.length || lines.filter(x=>/特約|保障|入院|医療|がん|認知症|収入/.test(x)).length<3) && tesseractCapable)lines=await runTesseractOCR(bitmap);
+  if(ocrAborted || thisJob!==photoOCRJob)return;
+  const raw=lines.join('\n');
+  if(!raw.trim()){riders=[];enabled=[];imported=true;baseline=0;baselineKnown=false;render();progress.textContent='OCR結果が空です。画像のピントと文字サイズを確認してください。';return;}
+  el('ocrText').value=raw;
+  el('parseText').click();
+  if(!riders.length){progress.textContent='文字は認識しましたが、CUBE特約を抽出できませんでした。写真の文字が読めるか確認してください。';el('ocrDetails').open=true;return;}
+  progress.textContent='OCR '+lines.length+'行を認識、特約 '+riders.length+'件をマトリクスへ反映。金額は原本と照合してください。';document.getElementById('riders').scrollIntoView({behavior:'smooth',block:'start'});
+ }catch(e){progress.textContent='自動読取に失敗しました：'+(e?.message||String(e))+'。通信環境を確認し、もう一度撮影してください。';progress.style.background='#fff0ee';progress.style.color='#a02d22';el('ocrDetails').open=true;console.error('CUBE OCR failed',e);}
+ finally{if(bitmap && typeof bitmap.close==='function')bitmap.close();ocrRun.disabled=!(browserOCRSupported||tesseractCapable);}
+};
+</script>
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.getRegistrations().then(rs=>Promise.all(rs.map(r=>r.unregister()))).catch(()=>{});}</script></body></html>
